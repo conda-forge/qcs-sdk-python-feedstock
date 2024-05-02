@@ -150,9 +150,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-qcs--sdk--python-green.svg)](https://anaconda.org/conda-forge/qcs-sdk-python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/qcs-sdk-python.svg)](https://anaconda.org/conda-forge/qcs-sdk-python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/qcs-sdk-python.svg)](https://anaconda.org/conda-forge/qcs-sdk-python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/qcs-sdk-python.svg)](https://anaconda.org/conda-forge/qcs-sdk-python) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-qcs--sdk--python--grpc--web-green.svg)](https://anaconda.org/conda-forge/qcs-sdk-python-grpc-web) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/qcs-sdk-python-grpc-web.svg)](https://anaconda.org/conda-forge/qcs-sdk-python-grpc-web) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/qcs-sdk-python-grpc-web.svg)](https://anaconda.org/conda-forge/qcs-sdk-python-grpc-web) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/qcs-sdk-python-grpc-web.svg)](https://anaconda.org/conda-forge/qcs-sdk-python-grpc-web) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-qcs_sdk_python-green.svg)](https://anaconda.org/conda-forge/qcs_sdk_python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/qcs_sdk_python.svg)](https://anaconda.org/conda-forge/qcs_sdk_python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/qcs_sdk_python.svg)](https://anaconda.org/conda-forge/qcs_sdk_python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/qcs_sdk_python.svg)](https://anaconda.org/conda-forge/qcs_sdk_python) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-qcs_sdk_python_grpc_web-green.svg)](https://anaconda.org/conda-forge/qcs_sdk_python_grpc_web) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/qcs_sdk_python_grpc_web.svg)](https://anaconda.org/conda-forge/qcs_sdk_python_grpc_web) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/qcs_sdk_python_grpc_web.svg)](https://anaconda.org/conda-forge/qcs_sdk_python_grpc_web) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/qcs_sdk_python_grpc_web.svg)](https://anaconda.org/conda-forge/qcs_sdk_python_grpc_web) |
 
 Installing qcs-sdk-python
 =========================
@@ -164,16 +162,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `qcs-sdk-python, qcs-sdk-python-grpc-web, qcs_sdk_python, qcs_sdk_python_grpc_web` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `qcs-sdk-python, qcs_sdk_python` can be installed with `conda`:
 
 ```
-conda install qcs-sdk-python qcs-sdk-python-grpc-web qcs_sdk_python qcs_sdk_python_grpc_web
+conda install qcs-sdk-python qcs_sdk_python
 ```
 
 or with `mamba`:
 
 ```
-mamba install qcs-sdk-python qcs-sdk-python-grpc-web qcs_sdk_python qcs_sdk_python_grpc_web
+mamba install qcs-sdk-python qcs_sdk_python
 ```
 
 It is possible to list all of the versions of `qcs-sdk-python` available on your platform with `conda`:
