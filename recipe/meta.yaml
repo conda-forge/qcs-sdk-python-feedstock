@@ -38,6 +38,8 @@ outputs:
         - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - python
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
       host:
         - pip
         - python
@@ -71,6 +73,8 @@ outputs:
         - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - python
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
       host:
         - pip
         - python
