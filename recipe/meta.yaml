@@ -22,6 +22,7 @@ requirements:
     - cargo-bundle-licenses
     - python
   host:
+    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
     - python
     - toml
 
@@ -38,8 +39,8 @@ outputs:
         - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - python
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+        - python
       host:
         - pip
         - python
@@ -73,8 +74,8 @@ outputs:
         - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - python
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+        - python
       host:
         - pip
         - python
