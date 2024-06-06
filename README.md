@@ -305,6 +305,3 @@ Feedstock Maintainers
 
 * [@MementoRC](https://github.com/MementoRC/)
 
-
-<!-- dummy commit to enable rerendering -->
-
