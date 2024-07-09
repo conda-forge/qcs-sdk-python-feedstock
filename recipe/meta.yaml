@@ -1,5 +1,5 @@
 {% set name = "qcs-sdk-python" %}
-{% set version = "0.17.9" %}
+{% set version = "0.18.0" %}
 
 package:
   name: qcs-sdk-python-split
@@ -7,22 +7,23 @@ package:
 
 source:
   url: https://github.com/rigetti/qcs-sdk-rust/archive/refs/tags/python/v{{ version }}.tar.gz
-  sha256: 59f855a289f4e9ef1cf8e969a47ab16abafe2eb753c58acfd683e271fc4f125a
+  sha256: ce8af6edb9444aaf7a0f2d4f933cf0f503c1b85c855f9b2e801f57cf32965040
 
 build:
   number: 0
 
 requirements:
   build:
-    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('rust') }}
-    - maturin >=1.0.0,<2.0.0
+    - {{ stdlib('c') }}
     - cargo-bundle-licenses
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-    - python
+    - maturin >=1.0.0,<2.0.0  # [build_platform != target_platform]
+    - python  # [build_platform != target_platform]
   host:
+    - maturin >=1.0.0,<2.0.0
     - python
     - toml
 
@@ -36,16 +37,16 @@ outputs:
     requirements:
       build:
         # Defines the runtime requirements for the package
-        - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-        - python
+        - python  # [build_platform != target_platform]
       host:
         - pip
         - python
       run:
-        - quil
+        - quil ==0.10.0
         - python
       run_constrained:
         - qcs-sdk-python-grpc-web ==9999999999
@@ -53,14 +54,10 @@ outputs:
       imports:
         - qcs_sdk.qcs_sdk
       requires:
-      #   - cargo-make
         - pip
         - rust
-      # source_files:
-      #   - Cargo.toml
       commands:
         - pip check
-      #   - makers
 
   - name: qcs-sdk-python-grpc-web
     script: install_grpc.sh  # [unix]
@@ -71,16 +68,16 @@ outputs:
     requirements:
       build:
         # Defines the runtime requirements for the package
-        - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-        - python
+        - python  # [build_platform != target_platform]
       host:
         - pip
         - python
       run:
-        - quil
+        - quil ==0.10.0
         - python
       run_constrained:
         - qcs-sdk-python ==9999999999
@@ -88,13 +85,9 @@ outputs:
       imports:
         - qcs_sdk.qcs_sdk
       requires:
-      #   - cargo-make
         - pip
-      # source_files:
-      #   - Cargo.toml
       commands:
         - pip check
-      #   - makers
 
   # - Naming conversion
   - name: qcs_sdk_python
