@@ -46,6 +46,7 @@ outputs:
         - pip
         - python
       run:
+        - quil
         - python
       run_constrained:
         - qcs-sdk-python-grpc-web ==9999999999
