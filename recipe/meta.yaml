@@ -14,15 +14,16 @@ build:
 
 requirements:
   build:
-    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('rust') }}
-    - maturin >=1.0.0,<2.0.0
+    - {{ stdlib('c') }}
     - cargo-bundle-licenses
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-    - python
+    - maturin >=1.0.0,<2.0.0  # [build_platform != target_platform]
+    - python  # [build_platform != target_platform]
   host:
+    - maturin >=1.0.0,<2.0.0
     - python
     - toml
 
@@ -36,16 +37,15 @@ outputs:
     requirements:
       build:
         # Defines the runtime requirements for the package
-        - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-        - python
+        - python  # [build_platform != target_platform]
       host:
         - pip
         - python
       run:
-        - quil ==0.10.0
         - python
       run_constrained:
         - qcs-sdk-python-grpc-web ==9999999999
@@ -67,16 +67,16 @@ outputs:
     requirements:
       build:
         # Defines the runtime requirements for the package
-        - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-        - python
+        - python  # [build_platform != target_platform]
       host:
         - pip
         - python
       run:
-        - quil ==0.10.0
+        - quil
         - python
       run_constrained:
         - qcs-sdk-python ==9999999999
