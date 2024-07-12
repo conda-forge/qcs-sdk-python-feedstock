@@ -46,7 +46,7 @@ outputs:
         - pip
         - python
       run:
-        - quil
+        - quil ==0.10.0
         - python
       run_constrained:
         - qcs-sdk-python-grpc-web ==9999999999
@@ -77,7 +77,7 @@ outputs:
         - pip
         - python
       run:
-        - quil
+        - quil ==0.10.0
         - python
       run_constrained:
         - qcs-sdk-python ==9999999999
