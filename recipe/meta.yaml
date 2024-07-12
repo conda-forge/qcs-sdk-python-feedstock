@@ -10,7 +10,7 @@ source:
   sha256: ce8af6edb9444aaf7a0f2d4f933cf0f503c1b85c855f9b2e801f57cf32965040
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -46,7 +46,7 @@ outputs:
         - pip
         - python
       run:
-        - quil ==0.10.0
+        - quil ==0.10
         - python
       run_constrained:
         - qcs-sdk-python-grpc-web ==9999999999
@@ -77,7 +77,7 @@ outputs:
         - pip
         - python
       run:
-        - quil ==0.10.0
+        - quil ==0.10
         - python
       run_constrained:
         - qcs-sdk-python ==9999999999

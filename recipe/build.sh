@@ -8,6 +8,7 @@ cd "${SRC_DIR}"/crates/python
   maturin build \
     --release \
     --strip \
+    --no-sdist \
     --out "${SRC_DIR}"/wheels
 
   # Re-build with patch package metadata for grpc-web
@@ -16,6 +17,7 @@ cd "${SRC_DIR}"/crates/python
   maturin build \
     --release \
     --strip \
+    --no-sdist \
     --out "${SRC_DIR}"/wheels
 
 cd "${SRC_DIR}"
