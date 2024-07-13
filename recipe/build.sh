@@ -2,9 +2,12 @@
 
 set -ex
 
+cargo update
+
 # Build
 cd "${SRC_DIR}"/crates/python
   export LD_LIBRARY_PATH="/usr/local/lib:${LD_LIBRARY_PATH}"
+  cargo update
   maturin build \
     --release \
     --strip \

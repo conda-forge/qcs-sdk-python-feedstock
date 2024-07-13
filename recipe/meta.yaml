@@ -1,5 +1,5 @@
 {% set name = "qcs-sdk-python" %}
-{% set version = "0.18.0" %}
+{% set version = "0.19.0" %}
 
 package:
   name: qcs-sdk-python-split
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/rigetti/qcs-sdk-rust/archive/refs/tags/python/v{{ version }}.tar.gz
-  sha256: ce8af6edb9444aaf7a0f2d4f933cf0f503c1b85c855f9b2e801f57cf32965040
+  sha256: 2a56136eeaedb84077717f890fbe4dcdfa8b9faeae89e97c1f3bec396042abbb
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
@@ -91,21 +91,19 @@ outputs:
 
   # - Naming conversion
   - name: qcs_sdk_python
-    build:
-      noarch: python
     requirements:
       run:
-        - qcs-sdk-python {{ version }}
+        # - qcs-sdk-python {{ version }}
+        - {{ pin_subpackage("qcs-sdk-python", exact=True) }}
     test:
       imports:
         - qcs_sdk.qcs_sdk
 
   - name: qcs_sdk_python_grpc_web
-    build:
-      noarch: python
     requirements:
       run:
-        - qcs-sdk-python-grpc-web {{ version }}
+        # - qcs-sdk-python-grpc-web {{ version }}
+        - {{ pin_subpackage("qcs-sdk-python-grpc-web", exact=True) }}
     test:
       imports:
         - qcs_sdk.qcs_sdk
