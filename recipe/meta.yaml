@@ -95,7 +95,8 @@ outputs:
       noarch: python
     requirements:
       run:
-        - qcs-sdk-python {{ version }}
+        # - qcs-sdk-python {{ version }}
+        - {{ pin_subpackage("qcs-sdk-python", exact=True) }}
     test:
       imports:
         - qcs_sdk.qcs_sdk
@@ -105,7 +106,8 @@ outputs:
       noarch: python
     requirements:
       run:
-        - qcs-sdk-python-grpc-web {{ version }}
+        # - qcs-sdk-python-grpc-web {{ version }}
+        - {{ pin_subpackage("qcs-sdk-python-grpc-web", exact=True) }}
     test:
       imports:
         - qcs_sdk.qcs_sdk
