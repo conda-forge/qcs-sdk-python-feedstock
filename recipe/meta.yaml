@@ -1,5 +1,5 @@
 {% set name = "qcs-sdk-python" %}
-{% set version = "0.19.0" %}
+{% set version = "0.19.2" %}
 
 package:
   name: qcs-sdk-python-split
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/rigetti/qcs-sdk-rust/archive/refs/tags/python/v{{ version }}.tar.gz
-  sha256: 2a56136eeaedb84077717f890fbe4dcdfa8b9faeae89e97c1f3bec396042abbb
+  sha256: 825456aa62f4e333a1c62a73c82ab311c7b67e9d32de37ac7a0dd1bc7fde0d7c
 
 build:
   number: 0
