@@ -1,6 +1,0 @@
---- Cargo.toml.orig	2019-07-17 14:52:00.000000000 +0000
-+++ Cargo.toml	2019-07-17 14:54:00.000000000 +0000
-@@ -44,1 +44,3 @@
- codegen-units = 1
-+[patch.crates-io]
-+quil-rs = { path = "crates/quil-rs" }
