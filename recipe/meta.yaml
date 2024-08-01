@@ -9,7 +9,7 @@ source:
   url: https://github.com/rigetti/qcs-sdk-rust/archive/refs/tags/python/v{{ version }}.tar.gz
   sha256: 825456aa62f4e333a1c62a73c82ab311c7b67e9d32de37ac7a0dd1bc7fde0d7c
   patches:
-    - fix-windows-path.patch  # [win]
+    # - fix-windows-path.patch  # [win]
 
 build:
   number: 0
