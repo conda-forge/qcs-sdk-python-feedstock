@@ -1,5 +1,7 @@
 @echo off
 
+git config --system core.longpaths true
+
 maturin build --release --manifest-path %SRC_DIR%\crates\python\Cargo.toml --out %SRC_DIR%\wheels
 
 # Re-build with patch package metadata for grpc-web
