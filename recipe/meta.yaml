@@ -31,9 +31,6 @@ outputs:
   - name: qcs-sdk-python
     script: install.sh  # [unix]
     script: install.bat  # [win]
-    build:
-      run_exports:
-        - {{ pin_subpackage("qcs-sdk-python", max_pin="x.x") }}
     requirements:
       build:
         # Defines the runtime requirements for the package
@@ -47,6 +44,7 @@ outputs:
         - python
       run:
         - quil ==0.11.2
+        - qcs-api-client-common
         - python
       run_constrained:
         - qcs-sdk-python-grpc-web ==9999999999
@@ -62,9 +60,6 @@ outputs:
   - name: qcs-sdk-python-grpc-web
     script: install_grpc.sh  # [unix]
     script: install_grpc.bat  # [win]
-    build:
-      run_exports:
-        - {{ pin_subpackage("qcs-sdk-python-grpc-web", max_pin="x.x") }}
     requirements:
       build:
         # Defines the runtime requirements for the package
@@ -78,6 +73,7 @@ outputs:
         - python
       run:
         - quil ==0.11.2
+        - qcs-api-client-common
         - python
       run_constrained:
         - qcs-sdk-python ==9999999999
@@ -93,7 +89,6 @@ outputs:
   - name: qcs_sdk_python
     requirements:
       run:
-        # - qcs-sdk-python {{ version }}
         - {{ pin_subpackage("qcs-sdk-python", exact=True) }}
     test:
       imports:
@@ -102,7 +97,6 @@ outputs:
   - name: qcs_sdk_python_grpc_web
     requirements:
       run:
-        # - qcs-sdk-python-grpc-web {{ version }}
         - {{ pin_subpackage("qcs-sdk-python-grpc-web", exact=True) }}
     test:
       imports:
