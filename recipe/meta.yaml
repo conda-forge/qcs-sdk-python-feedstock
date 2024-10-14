@@ -54,7 +54,7 @@ outputs:
         - qcs_sdk.qcs_sdk
       requires:
         - pip
-        - rust
+        - python
       commands:
         - pip check
 
