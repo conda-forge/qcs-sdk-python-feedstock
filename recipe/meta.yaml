@@ -1,5 +1,5 @@
 {% set name = "qcs-sdk-python" %}
-{% set version = "0.19.2" %}
+{% set version = "0.21.4" %}
 
 package:
   name: qcs-sdk-python-split
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/rigetti/qcs-sdk-rust/archive/refs/tags/python/v{{ version }}.tar.gz
-  sha256: 825456aa62f4e333a1c62a73c82ab311c7b67e9d32de37ac7a0dd1bc7fde0d7c
+  sha256: 5c3197670fd8b5a1e3c2353ecbf4ae0a2824a255dd0680b28855e01b1a90cea2
 
 build:
   number: 1
@@ -31,9 +31,6 @@ outputs:
   - name: qcs-sdk-python
     script: install.sh  # [unix]
     script: install.bat  # [win]
-    build:
-      run_exports:
-        - {{ pin_subpackage("qcs-sdk-python", max_pin="x.x") }}
     requirements:
       build:
         # Defines the runtime requirements for the package
@@ -45,8 +42,10 @@ outputs:
       host:
         - pip
         - python
+        - setuptools
       run:
-        - quil ==0.11.2
+        - quil ==0.13.2
+        - qcs-api-client-common
         - python
       run_constrained:
         - qcs-sdk-python-grpc-web ==9999999999
@@ -55,16 +54,13 @@ outputs:
         - qcs_sdk.qcs_sdk
       requires:
         - pip
-        - rust
+        - python
       commands:
         - pip check
 
   - name: qcs-sdk-python-grpc-web
     script: install_grpc.sh  # [unix]
     script: install_grpc.bat  # [win]
-    build:
-      run_exports:
-        - {{ pin_subpackage("qcs-sdk-python-grpc-web", max_pin="x.x") }}
     requirements:
       build:
         # Defines the runtime requirements for the package
@@ -76,8 +72,10 @@ outputs:
       host:
         - pip
         - python
+        - setuptools
       run:
-        - quil ==0.11.2
+        - quil ==0.13.2
+        - qcs-api-client-common
         - python
       run_constrained:
         - qcs-sdk-python ==9999999999
@@ -93,7 +91,6 @@ outputs:
   - name: qcs_sdk_python
     requirements:
       run:
-        # - qcs-sdk-python {{ version }}
         - {{ pin_subpackage("qcs-sdk-python", exact=True) }}
     test:
       imports:
@@ -102,7 +99,6 @@ outputs:
   - name: qcs_sdk_python_grpc_web
     requirements:
       run:
-        # - qcs-sdk-python-grpc-web {{ version }}
         - {{ pin_subpackage("qcs-sdk-python-grpc-web", exact=True) }}
     test:
       imports:
