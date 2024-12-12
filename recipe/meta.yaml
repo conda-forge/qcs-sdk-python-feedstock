@@ -55,6 +55,7 @@ outputs:
       requires:
         - pip
         - python
+        - numpy
       commands:
         - pip check
 
