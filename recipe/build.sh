@@ -15,7 +15,7 @@ cd "${SRC_DIR}"/crates/python
 
   # Re-build with patch package metadata for grpc-web
   ${PYTHON} "${SRC_DIR}"/crates/python/scripts/patch_grpc_web.py
-  cargo update hyper-proxy
+  # cargo update hyper-proxy
   maturin build \
     --release \
     --strip \
