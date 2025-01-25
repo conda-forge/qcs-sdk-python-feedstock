@@ -1,5 +1,5 @@
 {% set name = "qcs-sdk-python" %}
-{% set version = "0.21.4" %}
+{% set version = "0.21.6" %}
 
 package:
   name: qcs-sdk-python-split
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/rigetti/qcs-sdk-rust/archive/refs/tags/python/v{{ version }}.tar.gz
-  sha256: 5c3197670fd8b5a1e3c2353ecbf4ae0a2824a255dd0680b28855e01b1a90cea2
+  sha256: 6d14c0276520b7d67ee737ca3095f2af6a5e5a66cc5414224cbcb7778ba94a64
 
 build:
   number: 0
@@ -44,7 +44,7 @@ outputs:
         - python
         - setuptools
       run:
-        - quil ==0.13.2
+        - quil >=0.11.2
         - qcs-api-client-common
         - python
       run_constrained:
