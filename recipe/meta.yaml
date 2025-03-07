@@ -44,7 +44,7 @@ outputs:
         - python
         - setuptools
       run:
-        - quil >=0.11.2
+        - quil >=0.11.8
         - qcs-api-client-common
         - python
       run_constrained:
