@@ -44,8 +44,8 @@ outputs:
         - python
         - setuptools
       run:
-        - quil >=0.11.8
-        - qcs-api-client-common
+        - quil >=0.15.2
+        - qcs-api-client-common >=0.11.8
         - python
       run_constrained:
         - qcs-sdk-python-grpc-web ==9999999999
@@ -74,8 +74,8 @@ outputs:
         - python
         - setuptools
       run:
-        - quil ==0.13.2
-        - qcs-api-client-common
+        - quil ==0.15.2
+        - qcs-api-client-common >=0.11.8
         - python
       run_constrained:
         - qcs-sdk-python ==9999999999
