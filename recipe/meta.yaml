@@ -1,5 +1,5 @@
 {% set name = "qcs-sdk-python" %}
-{% set version = "0.21.6" %}
+{% set version = "0.21.14" %}
 
 package:
   name: qcs-sdk-python-split
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/rigetti/qcs-sdk-rust/archive/refs/tags/python/v{{ version }}.tar.gz
-  sha256: 6d14c0276520b7d67ee737ca3095f2af6a5e5a66cc5414224cbcb7778ba94a64
+  sha256: e98a053e3c693fa604615e8e456892498dfbb6668f89febceac8858a455dd04a
 
 build:
   number: 0
@@ -44,8 +44,8 @@ outputs:
         - python
         - setuptools
       run:
-        - quil >=0.11.2
-        - qcs-api-client-common
+        - quil >=0.15.2
+        - qcs-api-client-common >=0.11.8
         - python
       run_constrained:
         - qcs-sdk-python-grpc-web ==9999999999
@@ -74,8 +74,8 @@ outputs:
         - python
         - setuptools
       run:
-        - quil ==0.13.2
-        - qcs-api-client-common
+        - quil ==0.15.2
+        - qcs-api-client-common >=0.11.8
         - python
       run_constrained:
         - qcs-sdk-python ==9999999999
@@ -113,6 +113,7 @@ about:
   license_file:
     - LICENSE
     - THIRDPARTY.yml
+    - manual_changes_thirdparty.txt
   doc_url: https://docs.rs/qcs/latest/qcs/
 
 extra:
