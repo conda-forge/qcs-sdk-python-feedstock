@@ -10,7 +10,9 @@ source:
   sha256: e98a053e3c693fa604615e8e456892498dfbb6668f89febceac8858a455dd04a
 
 build:
-  number: 0
+  number: 1
+  script_env:
+    - PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1  # [py>=313]
 
 requirements:
   build:
