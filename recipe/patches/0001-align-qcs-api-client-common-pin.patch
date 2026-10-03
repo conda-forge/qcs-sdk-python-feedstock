@@ -1,0 +1,13 @@
+Align the python dependency pin with the qcs-api-client-common crate (0.26.0) the Rust workspace builds against.
+
+--- a/crates/lib/pyproject.toml
++++ b/crates/lib/pyproject.toml
+@@ -19,7 +19,7 @@
+ ]
+ dependencies = [
+     "quil>=0.37.1,<0.38.0",
+-    "qcs-api-client-common>=0.19.0,<0.20.0",
++    "qcs-api-client-common>=0.26.0,<0.27.0",
+ ]
+ 
+ [dependency-groups]

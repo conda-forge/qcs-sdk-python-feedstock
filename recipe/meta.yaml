@@ -1,13 +1,15 @@
 {% set name = "qcs-sdk-python" %}
-{% set version = "0.21.14" %}
+{% set version = "0.29.0" %}
 
 package:
   name: qcs-sdk-python-split
   version: {{ version }}
 
 source:
-  url: https://github.com/rigetti/qcs-sdk-rust/archive/refs/tags/python/v{{ version }}.tar.gz
-  sha256: e98a053e3c693fa604615e8e456892498dfbb6668f89febceac8858a455dd04a
+  url: https://github.com/rigetti/qcs-sdk-rust/archive/refs/tags/lib/v{{ version }}.tar.gz
+  sha256: a64d00edb7e7a9202191eff9e9cd8081842ba1430e2f4cb20523e16388c03822
+  patches:
+    - patches/0001-align-qcs-api-client-common-pin.patch
 
 build:
   number: 0
@@ -20,12 +22,11 @@ requirements:
     - {{ stdlib('c') }}
     - cargo-bundle-licenses
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-    - maturin >=1.0.0,<2.0.0  # [build_platform != target_platform]
+    - maturin >=1.9.4,<2.0.0  # [build_platform != target_platform]
     - python  # [build_platform != target_platform]
   host:
-    - maturin >=1.0.0,<2.0.0
+    - maturin >=1.9.4,<2.0.0
     - python
-    - toml
 
 outputs:
   - name: qcs-sdk-python
@@ -44,46 +45,15 @@ outputs:
         - python
         - setuptools
       run:
-        - quil >=0.15.2
-        - qcs-api-client-common >=0.11.8
+        - quil >=0.37.1,<0.38.0
+        - qcs-api-client-common >=0.26.0,<0.27.0
         - python
-      run_constrained:
-        - qcs-sdk-python-grpc-web ==9999999999
     test:
       imports:
-        - qcs_sdk.qcs_sdk
+        - qcs_sdk
       requires:
         - pip
         - python
-      commands:
-        - pip check
-
-  - name: qcs-sdk-python-grpc-web
-    script: install_grpc.sh  # [unix]
-    script: install_grpc.bat  # [win]
-    requirements:
-      build:
-        # Defines the runtime requirements for the package
-        - {{ compiler('c') }}
-        - {{ compiler('cxx') }}
-        - {{ stdlib('c') }}
-        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-        - python  # [build_platform != target_platform]
-      host:
-        - pip
-        - python
-        - setuptools
-      run:
-        - quil ==0.15.2
-        - qcs-api-client-common >=0.11.8
-        - python
-      run_constrained:
-        - qcs-sdk-python ==9999999999
-    test:
-      imports:
-        - qcs_sdk.qcs_sdk
-      requires:
-        - pip
       commands:
         - pip check
 
@@ -94,15 +64,7 @@ outputs:
         - {{ pin_subpackage("qcs-sdk-python", exact=True) }}
     test:
       imports:
-        - qcs_sdk.qcs_sdk
-
-  - name: qcs_sdk_python_grpc_web
-    requirements:
-      run:
-        - {{ pin_subpackage("qcs-sdk-python-grpc-web", exact=True) }}
-    test:
-      imports:
-        - qcs_sdk.qcs_sdk
+        - qcs_sdk
 
 about:
   home: https://github.com/rigetti/qcs-sdk-rust
