@@ -8,8 +8,8 @@ package:
 source:
   url: https://github.com/rigetti/qcs-sdk-rust/archive/refs/tags/lib/v{{ version }}.tar.gz
   sha256: 5a9df87ee23abb977dd858564e7bf4f720f67fda77f71b3ee10131aa69e285ad
-  patches:
-    - patches/0001-align-qcs-api-client-common-pin.patch
+  # patches:
+  #   - patches/0001-align-qcs-api-client-common-pin.patch
 
 build:
   number: 0
