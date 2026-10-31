@@ -49,14 +49,28 @@ outputs:
         - python
         - qcs-api-client-common >=0.26.0,<0.27.0
     tests:
-      - python:
-          imports:
-            - qcs_sdk
-            - qcs_sdk.client
-            - qcs_sdk.compiler.quilc
-            - qcs_sdk.qpu
-            - qcs_sdk.qvm
-          pip_check: true
+      - if: not (linux and build_platform != target_platform)
+        then:
+          - python:
+              imports:
+                - qcs_sdk
+                - qcs_sdk.client
+                - qcs_sdk.compiler.quilc
+                - qcs_sdk.qpu
+                - qcs_sdk.qvm
+              pip_check: true
+      # linux-64 is built on linux-aarch64; run the x86_64 python under qemu-execve
+      - if: linux and build_platform != target_platform
+        then:
+          - script:
+              - ${QEMU_EXECVE} ${PREFIX}/bin/python -c "import qcs_sdk, qcs_sdk.client, qcs_sdk.compiler.quilc, qcs_sdk.qpu, qcs_sdk.qvm"
+              - ${QEMU_EXECVE} ${PREFIX}/bin/python -m pip check
+            requirements:
+              build:
+                - qemu-execve-${{ target_platform | replace("linux-64", "x86_64") | replace("linux-", "") }} >=11
+                - sysroot_${{ target_platform }}
+              run:
+                - pip
     about:
       license_file:
         - LICENSE
@@ -69,10 +83,20 @@ outputs:
       run:
         - ${{ pin_subpackage("qcs-sdk-python", exact=True) }}
     tests:
-      - python:
-          imports:
-            - qcs_sdk
-          pip_check: false
+      - if: not (linux and build_platform != target_platform)
+        then:
+          - python:
+              imports:
+                - qcs_sdk
+              pip_check: false
+      - if: linux and build_platform != target_platform
+        then:
+          - script:
+              - ${QEMU_EXECVE} ${PREFIX}/bin/python -c "import qcs_sdk"
+            requirements:
+              build:
+                - qemu-execve-${{ target_platform | replace("linux-64", "x86_64") | replace("linux-", "") }} >=11
+                - sysroot_${{ target_platform }}
 
 about:
   homepage: https://github.com/rigetti/qcs-sdk-rust
