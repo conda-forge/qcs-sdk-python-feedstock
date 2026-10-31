@@ -10,7 +10,7 @@ source:
   sha256: 5e12269b94ddd1538c19111c8a986e460c979972d1e67d2fc1c728dd8778a544
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -43,12 +43,15 @@ outputs:
         - python
         - setuptools
       run:
-        - quil >=0.37.1,<0.38.0
         - qcs-api-client-common >=0.26.0,<0.27.0
         - python
     test:
       imports:
         - qcs_sdk
+        - qcs_sdk.client
+        - qcs_sdk.compiler.quilc
+        - qcs_sdk.qpu
+        - qcs_sdk.qvm
       requires:
         - pip
         - python
