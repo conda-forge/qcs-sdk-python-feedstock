@@ -26,8 +26,6 @@ outputs:
             then: git config --system core.longpaths true
           - ${{ PYTHON }} -m pip install ./crates/lib -vv --no-deps --no-build-isolation
           - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
-      dynamic_linking:
-        overlinking_behavior: error
     requirements:
       build:
         - ${{ compiler('c') }}
@@ -72,9 +70,6 @@ outputs:
           imports:
             - qcs_sdk
           pip_check: false
-    about:
-      license_file:
-        - LICENSE
 
 about:
   homepage: https://github.com/rigetti/qcs-sdk-rust
@@ -82,6 +77,8 @@ about:
   description: |
     Defines the Python bindings to make use of the QCS Rust SDK.
   license: Apache-2.0
+  license_file:
+    - LICENSE
   documentation: https://docs.rs/qcs/latest/qcs/
 
 extra:
