@@ -1,0 +1,114 @@
+context:
+  name: qcs-sdk-python
+  version: "0.31.1"
+
+recipe:
+  name: qcs-sdk-python-split
+  version: ${{ version }}
+
+source:
+  url: https://github.com/rigetti/qcs-sdk-rust/archive/refs/tags/lib/v${{ version }}.tar.gz
+  sha256: 5e12269b94ddd1538c19111c8a986e460c979972d1e67d2fc1c728dd8778a544
+
+build:
+  number: 1
+
+outputs:
+  - package:
+      name: qcs-sdk-python
+    build:
+      script:
+        env:
+          CARGO_PROFILE_RELEASE_LTO: "false"
+          CARGO_PROFILE_RELEASE_CODEGEN_UNITS: "16"
+        content:
+          - if: win
+            then: git config --system core.longpaths true
+          - if: unix
+            then: export CARGO_TARGET_DIR=/tmp/qcs-sdk-cargo-target
+            else: set "CARGO_TARGET_DIR=%SystemDrive%\qcs-sdk-cargo-target"
+          - ${{ PYTHON }} -m pip install ./crates/lib -vv --no-deps --no-build-isolation
+          - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - ${{ compiler('cxx') }}
+        - ${{ compiler('rust') }}
+        - ${{ stdlib('c') }}
+        - cargo-bundle-licenses
+        - if: build_platform != target_platform
+          then:
+            - python
+            - cross-python_${{ target_platform }}
+            - maturin >=1.9.4,<2.0.0
+      host:
+        - python
+        - pip
+        - maturin >=1.9.4,<2.0.0
+      run:
+        - python
+        - qcs-api-client-common >=0.26.0,<0.27.0
+    tests:
+      - if: not (linux and build_platform != target_platform)
+        then:
+          - python:
+              imports:
+                - qcs_sdk
+                - qcs_sdk.client
+                - qcs_sdk.compiler.quilc
+                - qcs_sdk.qpu
+                - qcs_sdk.qvm
+              pip_check: true
+      # linux-64 is built on linux-aarch64; run the x86_64 python under qemu-execve
+      - if: linux and build_platform != target_platform
+        then:
+          - script:
+              - ${QEMU_EXECVE} ${PREFIX}/bin/python -c "import qcs_sdk, qcs_sdk.client, qcs_sdk.compiler.quilc, qcs_sdk.qpu, qcs_sdk.qvm"
+              - ${QEMU_EXECVE} ${PREFIX}/bin/python -m pip check
+            requirements:
+              build:
+                - qemu-execve-${{ target_platform | replace("linux-64", "x86_64") | replace("linux-", "") }} >=11
+                - sysroot_${{ target_platform }}
+              run:
+                - pip
+    about:
+      license_file:
+        - LICENSE
+        - THIRDPARTY.yml
+        - manual_changes_thirdparty.txt
+
+  - package:
+      name: qcs_sdk_python
+    requirements:
+      run:
+        - ${{ pin_subpackage("qcs-sdk-python", exact=True) }}
+    tests:
+      - if: not (linux and build_platform != target_platform)
+        then:
+          - python:
+              imports:
+                - qcs_sdk
+              pip_check: false
+      - if: linux and build_platform != target_platform
+        then:
+          - script:
+              - ${QEMU_EXECVE} ${PREFIX}/bin/python -c "import qcs_sdk"
+            requirements:
+              build:
+                - qemu-execve-${{ target_platform | replace("linux-64", "x86_64") | replace("linux-", "") }} >=11
+                - sysroot_${{ target_platform }}
+
+about:
+  homepage: https://github.com/rigetti/qcs-sdk-rust
+  summary: Defines the Python bindings to make use of the QCS Rust SDK.
+  description: |
+    Defines the Python bindings to make use of the QCS Rust SDK.
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+  documentation: https://docs.rs/qcs/latest/qcs/
+
+extra:
+  recipe-maintainers:
+    - MementoRC
+  feedstock-name: qcs-sdk-python
