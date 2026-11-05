@@ -1,6 +1,6 @@
 context:
   name: qcs-sdk-python
-  version: "0.31.1"
+  version: "0.31.3"
 
 recipe:
   name: qcs-sdk-python-split
@@ -8,10 +8,10 @@ recipe:
 
 source:
   url: https://github.com/rigetti/qcs-sdk-rust/archive/refs/tags/lib/v${{ version }}.tar.gz
-  sha256: 5e12269b94ddd1538c19111c8a986e460c979972d1e67d2fc1c728dd8778a544
+  sha256: 7481f7e0f5186f603e3cab46d02d0c1654918cff35935a5fccf61703902ae189
 
 build:
-  number: 1
+  number: 0
 
 outputs:
   - package:
